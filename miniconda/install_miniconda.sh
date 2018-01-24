@@ -71,9 +71,6 @@ do
     CONDA_TINI_INFO=( `conda list tini | grep tini` )
     echo "tini ${CONDA_TINI_INFO[1]}" >> "${INSTALL_CONDA_PATH}/conda-meta/pinned"
 
-    # Install python bindings to DRMAA.
-    conda install -qy drmaa
-
     # Install common VCS packages.
     conda install -qy git
     if [ "${PYTHON_VERSION}" == "2" ]

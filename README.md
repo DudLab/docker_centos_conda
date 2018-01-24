@@ -1,16 +1,16 @@
-[![CircleCI](https://circleci.com/gh/jakirkham/docker_centos_drmaa_conda/tree/master.svg?style=shield)](https://circleci.com/gh/jakirkham/docker_centos_drmaa_conda/tree/master)
-[![](https://badge.imagelayers.io/jakirkham/centos_drmaa_conda:latest.svg)](https://imagelayers.io/?images=jakirkham/centos_drmaa_conda:latest 'Get your own badge on imagelayers.io')
+[![CircleCI](https://circleci.com/gh/jakirkham/docker_centos_conda/tree/master.svg?style=shield)](https://circleci.com/gh/jakirkham/docker_centos_conda/tree/master)
+[![](https://badge.imagelayers.io/jakirkham/centos_conda:latest.svg)](https://imagelayers.io/?images=jakirkham/centos_conda:latest 'Get your own badge on imagelayers.io')
 [![](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt 'Apache License Version 2.0')
 
 # Purpose
 
-In order to provide a simple portable test environment for Grid Engine, this repo contains what is necessary to build a CentOS 6 based image using Docker. In addition, it provides a copy of [`anaconda-client`]( http://docs.anaconda.org/ ) and [`conda`]( http://conda.pydata.org/ ) with some extensions for building.
+In order to provide a simple portable conda-based environment. This repo contains what is necessary to build a CentOS 6 based image using Docker. In addition, it provides a copy of [`anaconda-client`]( http://docs.anaconda.org/ ) and [`conda`]( http://conda.pydata.org/ ) with some extensions for building.
 
 # Building
 
 ## Automatic
 
-This repo is part of an automated build, which is hosted on Docker Hub ( <https://hub.docker.com/r/jakirkham/centos_drmaa_conda> ). Changes added to this trigger an automatic rebuild and deploy the resulting image to Docker Hub. To download an existing image, one simply needs to run `docker pull jakirkham/centos_drmaa_conda`.
+This repo is part of an automated build, which is hosted on Docker Hub ( <https://hub.docker.com/r/jakirkham/centos_conda> ). Changes added to this trigger an automatic rebuild and deploy the resulting image to Docker Hub. To download an existing image, one simply needs to run `docker pull jakirkham/centos_conda`.
 
 ## Manual
 
@@ -18,8 +18,8 @@ If one wishes to develop this repo, building will need to be performed manually.
 
 # Testing
 
-A simple test has been added during the installation of Grid Engine as this is the trickiest step and the one most likely to go wrong. The test submits a simple job and verifies that it runs successfully. As this occurs during the build process, failure of this test will terminate the build. Currently, Docker Hub does not provide a way to test the entrypoint to make sure it behaves properly. Ideally commonalities between the entrypoint and Grid Engine installation can be found and refactored out into a common script that both can use allowing it to be better tested. No direct testing of `conda` is performed. However, some basic installation and upgrading occurs, which should hopefully verify that it is working. Also, as this is pretty well tested by the team at Continuum, it is believed not to be at as serious of a risk.
+A CircleCI build of the image is performed on each commit. `conda` is exercised to update the `root` environments to match those in [conda-forge]( https://conda-forge.org/ ).
 
 # Usage
 
-Once an image is acquired either from one of the provided builds or manually, the image is designed to provide a preconfigured shell environment. Simply run `docker run --rm -it <NAME>`. This will configure Grid Engine and a number of environment variables useful for maintaining it and starts up `bash`. In the case of an automated build, `<NAME>` is `jakirkham/centos_drmaa_conda`.
+Once an image is acquired either from one of the provided builds or manually, the image is designed to provide a preconfigured shell environment. Simply run `docker run --rm -it <NAME>`. This starts up `bash` with a copy of `conda` in Python 2 and Python 3 environments available. In the case of an automated build, `<NAME>` is `jakirkham/centos_conda`.
