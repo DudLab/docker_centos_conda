@@ -8,14 +8,6 @@ RUN echo "exclude=*.i386 *.i686" >> /etc/yum.conf && \
     yum update -y -q && \
     yum clean all -y -q
 
-ADD gridengine /usr/share/gridengine
-RUN /usr/share/gridengine/install_ge.sh
-
-ENV SGE_CONFIG_DIR=/usr/share/gridengine \
-    SGE_ROOT=/usr/share/gridengine \
-    SGE_CELL=default \
-    DRMAA_LIBRARY_PATH=/usr/lib64/libdrmaa.so.1.0
-
 ADD miniconda /usr/share/miniconda
 RUN /usr/share/miniconda/install_miniconda.sh
 
