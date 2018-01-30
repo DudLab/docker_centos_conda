@@ -39,6 +39,7 @@ do
     openssl md5 "miniconda${PYTHON_VERSION}.sh" | grep "${MINICONDA_CHECKSUM}"
     bash "miniconda${PYTHON_VERSION}.sh" -b -p "${INSTALL_CONDA_PATH}"
     rm "miniconda${PYTHON_VERSION}.sh"
+    rm -rf ~/.pki
 
     # Configure `conda` and add to the path
     export PATH="${INSTALL_CONDA_PATH}/bin:${OLD_PATH}"
@@ -82,6 +83,7 @@ do
 
     # Clean out all unneeded intermediates.
     conda clean -tipsy
+    rm -rf ~/.conda
 
     # Provide links in standard path.
     ln -s "${INSTALL_CONDA_PATH}/bin/python"  "/usr/local/bin/python${PYTHON_VERSION}"
