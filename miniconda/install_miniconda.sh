@@ -83,6 +83,7 @@ do
 
     # Clean out all unneeded intermediates.
     conda clean -tipsy
+    rm -rf ~/.conda
 
     # Provide links in standard path.
     ln -s "${INSTALL_CONDA_PATH}/bin/python"  "/usr/local/bin/python${PYTHON_VERSION}"
