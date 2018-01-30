@@ -43,10 +43,10 @@ do
     # Configure `conda` and add to the path
     export PATH="${INSTALL_CONDA_PATH}/bin:${OLD_PATH}"
     source activate root
-    conda config --set show_channel_urls True
+    conda config --system --set show_channel_urls True
 
     # Add conda-forge to our channels.
-    conda config --add channels conda-forge
+    conda config --system --add channels conda-forge
 
     # Provide an empty pinning file should it be needed.
     touch "${INSTALL_CONDA_PATH}/conda-meta/pinned"
