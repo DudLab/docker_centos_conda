@@ -11,8 +11,8 @@ yum install -y -q curl
 # Install bzip2.
 yum install -y -q bzip2 tar
 
-# Install dependencies of conda's Qt4.
-yum install -y -q libSM libXext libXrender
+# Install dependencies of conda-forge's Qt.
+yum install -y -q libSM libXext libXrender mesa-libGL
 
 # Install basic fonts (needed by things like Graphviz).
 yum install -y -q urw-fonts
