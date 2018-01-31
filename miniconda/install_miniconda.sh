@@ -25,7 +25,6 @@ export MINICONDA2_CHECKSUM="7097150146dd3b83c805223663ebffcc"
 export MINICONDA3_CHECKSUM="c1c15d3baba15bf50293ae963abef853"
 
 # Install everything for both environments.
-export OLD_PATH="${PATH}"
 for PYTHON_VERSION in 2 3;
 do
     export INSTALL_CONDA_PATH="/opt/conda${PYTHON_VERSION}"
@@ -42,8 +41,7 @@ do
     rm -rf ~/.pki
 
     # Configure `conda` and add to the path
-    export PATH="${INSTALL_CONDA_PATH}/bin:${OLD_PATH}"
-    source activate root
+    source "${INSTALL_CONDA_PATH}/bin/activate"
     conda config --system --set show_channel_urls True
 
     # Add conda-forge to our channels.
@@ -89,6 +87,9 @@ do
     ln -s "${INSTALL_CONDA_PATH}/bin/python"  "/usr/local/bin/python${PYTHON_VERSION}"
     ln -s "${INSTALL_CONDA_PATH}/bin/pip"  "/usr/local/bin/pip${PYTHON_VERSION}"
     ln -s "${INSTALL_CONDA_PATH}/bin/conda"  "/usr/local/bin/conda${PYTHON_VERSION}"
+
+    # Remove `conda` from the path
+    source "${INSTALL_CONDA_PATH}/bin/deactivate"
 done
 
 # Set the conda3 environment as the default.
