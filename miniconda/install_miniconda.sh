@@ -20,9 +20,9 @@ yum install -y -q urw-fonts
 # Clean out yum.
 yum clean all -y -q
 
-export MINICONDA_VERSION="4.3.21"
-export MINICONDA2_CHECKSUM="7097150146dd3b83c805223663ebffcc"
-export MINICONDA3_CHECKSUM="c1c15d3baba15bf50293ae963abef853"
+export MINICONDA_VERSION="4.4.10"
+export MINICONDA2_CHECKSUM="dd54b344661560b861f86cc5ccff044b"
+export MINICONDA3_CHECKSUM="bec6203dbb2f53011e974e9bf4d46e93"
 
 # Install everything for both environments.
 for PYTHON_VERSION in 2 3;
