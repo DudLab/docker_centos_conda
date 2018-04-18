@@ -13,10 +13,6 @@ RUN echo "exclude=*.i386 *.i686" >> /etc/yum.conf && \
 ADD miniconda /usr/share/miniconda
 RUN /usr/share/miniconda/install_miniconda.sh
 
-ENV PATH=/opt/conda/bin:$PATH \
-    CONDA_DEFAULT_ENV=root \
-    CONDA_ENV_PATH=/opt/conda
-
 ADD docker /usr/share/docker
 
 ENTRYPOINT [ "/opt/conda/bin/tini", "--", "/usr/share/docker/entrypoint.sh" ]

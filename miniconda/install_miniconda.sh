@@ -20,9 +20,9 @@ yum install -y -q urw-fonts
 # Clean out yum.
 yum clean all -y -q
 
-export MINICONDA_VERSION="4.3.21"
-export MINICONDA2_CHECKSUM="7097150146dd3b83c805223663ebffcc"
-export MINICONDA3_CHECKSUM="c1c15d3baba15bf50293ae963abef853"
+export MINICONDA_VERSION="4.4.10"
+export MINICONDA2_CHECKSUM="dd54b344661560b861f86cc5ccff044b"
+export MINICONDA3_CHECKSUM="bec6203dbb2f53011e974e9bf4d46e93"
 
 # Install everything for both environments.
 for PYTHON_VERSION in 2 3;
@@ -37,27 +37,29 @@ do
     openssl md5 "miniconda${PYTHON_VERSION}.sh"
     openssl md5 "miniconda${PYTHON_VERSION}.sh" | grep "${MINICONDA_CHECKSUM}"
     bash "miniconda${PYTHON_VERSION}.sh" -b -p "${INSTALL_CONDA_PATH}"
-    rm "miniconda${PYTHON_VERSION}.sh"
+    rm -f "miniconda${PYTHON_VERSION}.sh"
     rm -rf ~/.pki
 
     # Configure `conda` and add to the path
-    source "${INSTALL_CONDA_PATH}/bin/activate"
-    conda config --system --set show_channel_urls True
+    source "${INSTALL_CONDA_PATH}/etc/profile.d/conda.sh"
+    conda activate base
 
     # Add conda-forge to our channels.
+    conda config --system --set show_channel_urls True
     conda config --system --add channels conda-forge
 
     # Provide an empty pinning file should it be needed.
     touch "${INSTALL_CONDA_PATH}/conda-meta/pinned"
 
     # Update conda and other basic dependencies.
+    conda update -qy conda
     conda update -qy --all
 
     # Update to latest Python minor version.
     conda install -qy "python=${PYTHON_VERSION}"
+    conda update -qy --all
 
     # Install some other conda relevant packages.
-    conda update -qy --all
     conda install -qy pycrypto
     conda install -qy conda-build
     conda install -qy anaconda-client
@@ -89,7 +91,7 @@ do
     ln -s "${INSTALL_CONDA_PATH}/bin/conda"  "/usr/local/bin/conda${PYTHON_VERSION}"
 
     # Remove `conda` from the path
-    source "${INSTALL_CONDA_PATH}/bin/deactivate"
+    conda deactivate
 done
 
 # Set the conda3 environment as the default.
