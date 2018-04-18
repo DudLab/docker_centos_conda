@@ -41,7 +41,8 @@ do
     rm -rf ~/.pki
 
     # Configure `conda` and add to the path
-    source "${INSTALL_CONDA_PATH}/bin/activate"
+    source "${INSTALL_CONDA_PATH}/etc/profile.d/conda.sh"
+    conda activate base
 
     # Add conda-forge to our channels.
     conda config --system --set show_channel_urls True
@@ -89,7 +90,7 @@ do
     ln -s "${INSTALL_CONDA_PATH}/bin/conda"  "/usr/local/bin/conda${PYTHON_VERSION}"
 
     # Remove `conda` from the path
-    source "${INSTALL_CONDA_PATH}/bin/deactivate"
+    conda deactivate
 done
 
 # Set the conda3 environment as the default.
