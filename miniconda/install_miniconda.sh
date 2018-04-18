@@ -37,7 +37,7 @@ do
     openssl md5 "miniconda${PYTHON_VERSION}.sh"
     openssl md5 "miniconda${PYTHON_VERSION}.sh" | grep "${MINICONDA_CHECKSUM}"
     bash "miniconda${PYTHON_VERSION}.sh" -b -p "${INSTALL_CONDA_PATH}"
-    rm "miniconda${PYTHON_VERSION}.sh"
+    rm -f "miniconda${PYTHON_VERSION}.sh"
     rm -rf ~/.pki
 
     # Configure `conda` and add to the path
