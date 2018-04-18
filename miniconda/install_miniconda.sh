@@ -52,6 +52,7 @@ do
     touch "${INSTALL_CONDA_PATH}/conda-meta/pinned"
 
     # Update conda and other basic dependencies.
+    conda update -qy conda
     conda update -qy --all
 
     # Update to latest Python minor version.
