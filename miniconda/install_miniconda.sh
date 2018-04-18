@@ -95,5 +95,4 @@ do
 done
 
 # Set the conda3 environment as the default.
-# This should be removed in the future.
 ln -s /opt/conda3 /opt/conda
