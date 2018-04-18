@@ -55,9 +55,9 @@ do
 
     # Update to latest Python minor version.
     conda install -qy "python=${PYTHON_VERSION}"
+    conda update -qy --all
 
     # Install some other conda relevant packages.
-    conda update -qy --all
     conda install -qy pycrypto
     conda install -qy conda-build
     conda install -qy anaconda-client
