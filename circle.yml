@@ -8,4 +8,4 @@ dependencies:
 
 test:
   override:
-    - docker build -t jakirkham/centos_drmaa_conda .
+    - docker build -t jakirkham/centos_conda .
