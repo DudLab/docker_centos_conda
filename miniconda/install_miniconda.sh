@@ -42,9 +42,9 @@ do
 
     # Configure `conda` and add to the path
     source "${INSTALL_CONDA_PATH}/bin/activate"
-    conda config --system --set show_channel_urls True
 
     # Add conda-forge to our channels.
+    conda config --system --set show_channel_urls True
     conda config --system --add channels conda-forge
 
     # Provide an empty pinning file should it be needed.
