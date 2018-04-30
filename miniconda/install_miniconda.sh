@@ -96,4 +96,3 @@ done
 
 # Set the conda3 environment as the default.
 ln -s /opt/conda3 /opt/conda
-ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
