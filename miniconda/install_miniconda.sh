@@ -85,10 +85,22 @@ do
     conda clean -tipsy
     rm -rf ~/.conda
 
-    # Provide links in standard path.
-    ln -s "${INSTALL_CONDA_PATH}/bin/python"  "/usr/local/bin/python${PYTHON_VERSION}"
-    ln -s "${INSTALL_CONDA_PATH}/bin/pip"  "/usr/local/bin/pip${PYTHON_VERSION}"
-    ln -s "${INSTALL_CONDA_PATH}/bin/conda"  "/usr/local/bin/conda${PYTHON_VERSION}"
+    # Provide shell wrapper scripts to run in each `conda` environment.
+    for CONDA_ENV_CMD in "python" "pip" "conda"; do
+        touch "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        chmod +x "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        echo -e '#!/bin/bash' >> "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        echo -e "" >> "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        echo -e "set -e" >> "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        echo -e "" >> "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        echo -e "conda deactivate &> /dev/null || true" >> "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        echo -e "set -a" >> "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        echo -e ". /opt/conda${PYTHON_VERSION}/etc/profile.d/conda.sh" >> "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        echo -e "conda activate base" >> "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        echo -e "set +a" >> "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        echo -e "" >> "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+        echo -e "exec ${CONDA_ENV_CMD} "'$@' >> "/usr/local/bin/${CONDA_ENV_CMD}${PYTHON_VERSION}"
+    done
 
     # Remove `conda` from the path
     conda deactivate
