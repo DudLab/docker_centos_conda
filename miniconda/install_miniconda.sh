@@ -24,6 +24,17 @@ export MINICONDA_VERSION="4.4.10"
 export MINICONDA2_CHECKSUM="dd54b344661560b861f86cc5ccff044b"
 export MINICONDA3_CHECKSUM="bec6203dbb2f53011e974e9bf4d46e93"
 
+# Prep directory structure for Miniconda installs.
+mkdir /opt/conda2
+mkdir /opt/conda3
+
+# Set the conda3 environment as the default.
+ln -s /opt/conda3 /opt/conda
+
+# Share the pkg cache between installs.
+mkdir /opt/conda/pkgs
+ln -s /opt/conda/pkgs /opt/conda2/pkgs
+
 # Install everything for both environments.
 for PYTHON_VERSION in 2 3;
 do
@@ -36,7 +47,7 @@ do
     curl -L "https://repo.continuum.io/miniconda/Miniconda${PYTHON_VERSION}-${MINICONDA_VERSION}-Linux-x86_64.sh" > "miniconda${PYTHON_VERSION}.sh"
     openssl md5 "miniconda${PYTHON_VERSION}.sh"
     openssl md5 "miniconda${PYTHON_VERSION}.sh" | grep "${MINICONDA_CHECKSUM}"
-    bash "miniconda${PYTHON_VERSION}.sh" -b -p "${INSTALL_CONDA_PATH}"
+    bash "miniconda${PYTHON_VERSION}.sh" -b -u -p "${INSTALL_CONDA_PATH}"
     rm -f "miniconda${PYTHON_VERSION}.sh"
     rm -rf ~/.pki
 
@@ -105,6 +116,3 @@ do
     # Remove `conda` from the path
     conda deactivate
 done
-
-# Set the conda3 environment as the default.
-ln -s /opt/conda3 /opt/conda
