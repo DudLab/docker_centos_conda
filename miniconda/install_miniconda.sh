@@ -64,10 +64,12 @@ do
 
     # Update conda and other basic dependencies.
     conda update -qy conda
-    conda update -qy --all
 
     # Update to latest Python minor version.
-    conda install -qy "python=${PYTHON_VERSION}"
+    # Ensure we use conda-forge's python no matter what.
+    conda install -qy "conda-forge::python=${PYTHON_VERSION}"
+
+    # Update everything else.
     conda update -qy --all
 
     # Install some other conda relevant packages.
