@@ -2,7 +2,7 @@ FROM centos:6
 MAINTAINER John Kirkham <jakirkham@gmail.com>
 
 # Add a timestamp for the build. Also, bust the cache.
-ADD http://tycho.usno.navy.mil/timer.html /opt/docker/etc/timestamp
+ADD https://now.httpbin.org/when/now /opt/docker/etc/timestamp
 
 ENV LANG en_US.UTF-8
 
