@@ -92,7 +92,7 @@ do
         # Mercurial is Python 2 only.
         conda install -qy mercurial
     fi
-    conda install -qy svn
+    conda install -qy defaults::svn
 
     # Clean out all unneeded intermediates.
     conda clean -tipsy
