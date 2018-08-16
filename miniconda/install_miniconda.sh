@@ -57,6 +57,7 @@ do
 
     # Add conda-forge to our channels.
     conda config --system --set show_channel_urls True
+    conda config --system --remove channels defaults
     conda config --system --add channels conda-forge
 
     # Provide an empty pinning file should it be needed.
@@ -66,8 +67,7 @@ do
     conda update -qy conda
 
     # Update to latest Python minor version.
-    # Ensure we use conda-forge's python no matter what.
-    conda install -qy "conda-forge::python=${PYTHON_VERSION}"
+    conda install -qy "python=${PYTHON_VERSION}"
 
     # Update everything else.
     conda update -qy --all
@@ -92,7 +92,7 @@ do
         # Mercurial is Python 2 only.
         conda install -qy mercurial
     fi
-    conda install -qy svn
+    conda install -qy defaults::svn
 
     # Clean out all unneeded intermediates.
     conda clean -tipsy
