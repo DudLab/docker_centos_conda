@@ -57,6 +57,7 @@ do
 
     # Add conda-forge to our channels.
     conda config --system --set show_channel_urls True
+    conda config --system --remove channels defaults
     conda config --system --add channels conda-forge
 
     # Provide an empty pinning file should it be needed.
