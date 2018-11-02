@@ -63,6 +63,10 @@ do
     # Provide an empty pinning file should it be needed.
     touch "${INSTALL_CONDA_PATH}/conda-meta/pinned"
 
+    # Pin Python major minor version to match installer.
+    PYTHON_VERSION="$(python -c 'import sys; print("%i.%i" % (sys.version_info[:2]))')"
+    echo "python ${PYTHON_VERSION}.*" >> "${INSTALL_CONDA_PATH}/conda-meta/pinned"
+
     # Update conda and other basic dependencies.
     conda update -qy conda
 
