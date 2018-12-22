@@ -20,9 +20,9 @@ yum install -y -q urw-fonts
 # Clean out yum.
 yum clean all -y -q
 
-export MINICONDA_VERSION="4.4.10"
-export MINICONDA2_CHECKSUM="dd54b344661560b861f86cc5ccff044b"
-export MINICONDA3_CHECKSUM="bec6203dbb2f53011e974e9bf4d46e93"
+export MINICONDA_VERSION="4.5.11"
+export MINICONDA2_CHECKSUM="458324438b7b0e5afcc272b63d44195d"
+export MINICONDA3_CHECKSUM="e1045ee415162f944b6aebfe560b8fee"
 
 # Prep directory structure for Miniconda installs.
 mkdir /opt/conda2
