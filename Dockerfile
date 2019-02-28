@@ -2,7 +2,7 @@ FROM jakirkham/centos
 MAINTAINER John Kirkham <jakirkham@gmail.com>
 
 # Add a timestamp for the build. Also, bust the cache.
-ADD https://now.httpbin.org/when/now /opt/docker/etc/timestamp
+ADD http://worldclockapi.com/api/json/utc/now /opt/docker/etc/timestamp
 
 ENV LANG en_US.UTF-8
 
